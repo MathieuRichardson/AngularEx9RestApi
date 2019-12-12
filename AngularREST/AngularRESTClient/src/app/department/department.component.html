@@ -1,0 +1,48 @@
+<h1 *ngIf="message" style="color:red; text-align: center;">{{message}}</h1>
+<h2 *ngIf="department">department form</h2>
+
+<!--Loading customers busy indicator-->
+<div *ngIf='loadingDepartmenrs' style="text-align: center;">
+    <span>Loading...</span>
+</div>
+
+<div class="card-container" *ngIf="!loadingDepartmenrs && department">
+    <div class="card">
+        <form #departmentForm="ngForm" (ngSubmit)="onFormSubmit(departmentForm)">
+            <div *ngIf="department.id">
+                <label>
+                    ID:<br/> <input name="id" #id="ngModel"[(ngModel)]="department.id" class="form-control" readonly> 
+                </label>
+            </div>
+            <div>
+                <label>
+                    DepartmentName: <br/><input name="name" required minlength="3" #name="ngModel"
+                     [(ngModel)]="department.name" class="form-control">  
+                </label>
+                <i *ngIf="(name?.error?.required && name?.error?.minlength) && departmentForm.submitted && !isValidFormSubmted"
+                [attr.title]="name?.error?.required 
+                ? 'name name required' 
+                :name?.error?.minlength
+                ? 'Name minimum length 3':''"
+                >!</i>
+            </div>
+            <div>
+                <label>
+                    Description: <br/><input name="Description" required  #description="ngModel"
+                     [(ngModel)]="department.description" class="form-control">  
+                </label>
+                <i *ngIf="(description?.error?.required && departmentForm.submitted && !isValidFormSubmted)"
+                [attr.title]="name?.error?.required 
+                ? 'description is required' 
+                :''"
+                >!</i>
+            </div>
+            <br/>
+            <button [disabled]="departmentSaving">{{button}}</button>
+            <div *ngIf='departmentSaving' style="text-align: center;">
+                <span>Saving...</span>
+            </div>
+            <div>{{saveMessage}}</div>
+        </form>
+    </div>
+</div>

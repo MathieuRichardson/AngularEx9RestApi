@@ -1,0 +1,38 @@
+test
+<h1 *ngIf="message" style="color:red; text-align: center;">{{message}}</h1>
+
+<div *ngIf="loadingDepartments" style="text-align: center;">
+    <p>Loading...</p>
+</div>
+
+<div *ngIf="departmentDeleting" style="text-align: center;">
+    <p>deleting...</p>
+</div>
+
+<div *ngIf="departments" class="card-container">
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let department of departments">
+            <th>
+                <a routerLink='/departements/detail/{{department.id}}'>{{department.id}}</a>
+            </th>
+            <th>
+                {{department.name}}
+            </th>
+            <th>
+                {{department.description}}
+            </th>
+            <th>
+                <button (click)="deleteDepartment(department.id)">Delete</button>
+            </th>
+        </tr>
+
+    </table>
+</div>
+
+<div *ngIf="!loadingDepartments&&!departments">No departments found</div>

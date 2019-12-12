@@ -1,0 +1,18 @@
+GET http://localhost:54878/api/Customers HTTP/1.1
+
+###
+
+GET http://localhost:54878/api/Customers/Details/1 HTTP/1.1
+
+###
+
+POST http://localhost:54878/api/Customers/Create HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Jim",
+    "lastName": "Jones",
+    "ssn":"111-444-555"
+}
+
+###
